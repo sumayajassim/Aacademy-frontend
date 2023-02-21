@@ -28,7 +28,7 @@ function App() {
   },[])
 
   const registerHandler = (user) => {
-    axios.post('http://localhost:4000/signup', user).then((res) =>{
+    axios.post('http://localhost:4000/auth/signup', user).then((res) =>{
       console.log(res)
     })
     console.log('registered!!')
@@ -37,7 +37,7 @@ function App() {
 
   const loginHandler = (user) => {
     try{
-      axios.post('http://localhost:4000/login', user)
+      axios.post('http://localhost:4000/auth/login', user)
       .then((res) =>{
        if(res.data.token != null){
         localStorage.setItem('token', res.data.token)
@@ -53,7 +53,7 @@ function App() {
     <Router>
       <Navbar/>
         <Routes>
-          <Route path="/" element={isAuth? <Home/> : <Signin loginHandler={loginHandler}/>}/>
+          <Route path="/"  element={isAuth? <Home/> : <Signin loginHandler={loginHandler}/>}/>
           <Route path="/signup" element={<Signup registerHandler={registerHandler}/>}/>
           <Route path="/signin" element={<Signin loginHandler={loginHandler}/>}/>
         </Routes>
